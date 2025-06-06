@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserLoginController;
-use Illuminate\Support\Facades\{Auth,Route};
+use Illuminate\Support\Facades\{Auth, Route};
 use App\Models\User;
 
 /*
@@ -36,13 +36,16 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
         return view('admin.users.index', compact('users'));
     })->name('add-user');
     Route::post('/store-user', [RegisterController::class, 'registerUser'])->name('store-user');
-    Route::put('/admin/update-user/{id}', [RegisterController::class, 'update'])->name('admin.update-user');
+    Route::post('/update-user', [RegisterController::class, 'updateUser'])->name('admin.update-user');
 });
 
 Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
-    Route::view('/home', 'user.index')->name('user.home');
-    // Add more user-only routes here
+    Route::view('/home', 'users.regular-user.index')->name('user.home');
+
+    Route::view('/settings', 'settings.index')->name('user.settings');
+    Route::view('/change-password', 'settings.change-password')->name('user.password');
 });
 
 
 Route::post('/logout', [UserLoginController::class, 'logout'])->name('admin.logout');
+

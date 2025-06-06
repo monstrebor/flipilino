@@ -42,13 +42,14 @@ class RegisterController extends Controller
         return redirect()->route('login');
     }
 
-    public function update(RegisterForm $request, $id)
-    {
-        $validated = $request->validated();
+public function updateUser(RegisterForm $request)
+{
+    $validated = $request->validated();
+    $user = User::where('id', $request->id)->firstOrFail();
+    $user->fill($validated);
+    $user->save();
 
-        $user = User::findOrFail($id);
-        $user->update($validated);
+    return redirect()->back()->with('success', 'User updated successfully!');
+}
 
-        return redirect()->back()->with('success', 'User updated successfully!');
-    }
 }

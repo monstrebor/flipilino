@@ -1,4 +1,4 @@
-@extends('Admin.layout.layout')
+@extends('admin.layout.layout')
 
 @section('title', 'Add User Page')
 
@@ -8,8 +8,8 @@
 
 @section('content')
 <div class="w-full h-full">
-    @include('Admin.partials.navbar')
-    @include('Admin.partials.sidebar')
+    @include('admin.partials.navbar')
+    @include('admin.partials.sidebar')
 
     <div class="container my-5">
         <div class="border rounded shadow-lg p-4">
@@ -27,6 +27,7 @@
                         <th class="py-2 px-4 border">#</th>
                         <th class="py-2 px-4 border">Name</th>
                         <th class="py-2 px-4 border">Email</th>
+                        <th class="py-2 px-4 border">Role</th>
                         <th class="py-2 px-4 border">Actions</th>
                     </tr>
                 </thead>
@@ -36,6 +37,13 @@
                         <td class="py-2 px-4 border">{{ $user->id }}</td>
                         <td class="py-2 px-4 border">{{ $user->name }}</td>
                         <td class="py-2 px-4 border">{{ $user->email }}</td>
+                        <td class="py-2 px-4 border">
+                            @foreach ($user->roles as $role)
+                            <span class="inline-block bg-blue-100 text-blue-800 text-md px-2 py-1 rounded-full mr-1">
+                                {{ $role->name }}
+                            </span>
+                            @endforeach
+                        </td>
                         <td class="py-2 px-4 border">
                             <button class="btn btn-primary editBtn" data-id="{{ $user->id }}"
                                 data-name="{{ $user->name }}" data-email="{{ $user->email }}" data-bs-toggle="modal"
@@ -100,13 +108,12 @@
 
     <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
-            <form id="editForm" class="modal-content" method="POST" action="{{ route('admin.update-user', $user->id) }}">
+            <form id="editForm" class="modal-content" method="POST" action="{{ route('admin.update-user')}}">
                 @csrf
-                @method('PUT')
                 <div class="modal-header">
                     <h5 class="modal-title">Edit User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    <input type="hidden" id="editUserId">
+                    <input type="number" name="id" id="editUserId">
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">

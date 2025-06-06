@@ -16,15 +16,34 @@ class UserLoginController extends Controller
             session()->regenerate();
             $user = Auth::user();
 
-            if ($user->is_new == true) {
-                return redirect()->route('admin.password')->with('error', 'Please change your password.');
+            // Force password change if it's the user's first login
+            if ($user->is_new) {
+                if ($user->hasRole('admin')) {
+                    return redirect()->route('admin.password')->with('error', 'Please change your password.');
+                }
+
+                if ($user->hasRole('user')) {
+                    return redirect()->route('user.password')->with('error', 'Please change your password.');
+                }
             }
 
-            return redirect()->route('admin.home');
+            // Redirect based on user role
+            if ($user->hasRole('admin')) {
+                return redirect()->route('admin.home');
+            }
+
+            if ($user->hasRole('user')) {
+                return redirect()->route('user.home');
+            }
+
+            // Optional: fallback for unassigned roles
+            return redirect()->route('login')->with('error', 'Your account has no assigned role.');
         }
 
+        // If login fails
         return back()->withErrors(['email' => 'Invalid credentials, please try again.']);
     }
+
 
     public function logout(): RedirectResponse
     {
