@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\UserLoginController;
 use Illuminate\Support\Facades\{Auth, Route};
+use App\Http\Controllers\Auth\GoogleController;
 use App\Models\User;
 
 /*
@@ -41,7 +42,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 });
 
 Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
-    Route::view('/home', 'users.regular-user.index')->name('user.home');
+    Route::view('/home', 'users.regular-user.index')->name('home');
 
     Route::view('/settings', 'settings.index')->name('user.settings');
     Route::view('/change-password', 'settings.change-password')->name('user.password');
@@ -51,4 +52,9 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
 
 
 Route::post('/logout', [UserLoginController::class, 'logout'])->name('admin.logout');
+
+
+Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
 

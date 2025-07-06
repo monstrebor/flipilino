@@ -17,7 +17,7 @@
                     <div class="d-flex align-items-center mb-3">
                         <img src="#" class="rounded-circle me-2" alt="Avatar">
                         <div>
-                            <div class="fw-bold">John Doe</div>
+                            <div class="fw-bold">{{ Auth::user()->name }}</div>
                             <small class="text-muted">Public</small>
                         </div>
                     </div>
@@ -53,4 +53,5 @@
             </div>
         </div>
     </div>
+
 </div>

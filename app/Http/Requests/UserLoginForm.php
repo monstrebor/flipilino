@@ -22,7 +22,7 @@ class UserLoginForm extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'email'],
+            'login' => ['required', 'string'],
             'password' => ['required', 'min:6'],
         ];
     }
@@ -30,8 +30,7 @@ class UserLoginForm extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'The email field is required.',
-            'email.email' => 'Enter a valid email address.',
+            'login.required' => 'The email or username field is required.',
             'password.required' => 'The password field is required.',
             'password.min' => 'The password must be at least 6 characters long.',
         ];

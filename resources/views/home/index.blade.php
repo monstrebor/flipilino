@@ -23,53 +23,49 @@
                 conversations.</p>
         </div>
 
-        <div class="w-1/2 bg-gradient-to-tr from-indigo-700 to-blue-100 text-white flex flex-col items-center justify-center p-6">
+        <div
+            class="w-1/2 bg-gradient-to-tr from-indigo-700 to-blue-100 text-white flex flex-col items-center justify-center p-6">
             @include('layout.all_notif')
             <fieldset class="flex justify-center items-center">
                 <form id="login-form" class="w-full max-w-md" action="{{ route('login.store') }}" method="POST">
                     @csrf
                     <h2 class="text-3xl font-bold mb-6 text-center">Login</h2>
-                    <input type="email" placeholder="Email" name="email"
+                    <input type="text" placeholder="Email or username" name="login"
                         class="text-black w-full p-4 mb-4 border border-gray-300 rounded" />
-                    @error('email')
-                        <span class="text-red-500">{{ $message }}</span>
+                    @error('login')
+                    <span class="text-red-500">{{ $message }}</span>
                     @enderror
                     <input type="password" placeholder="Password" name="password"
                         class="text-black w-full p-4 mb-4 border border-gray-300 rounded" />
                     @error('password')
-                        <span class="text-red-500">{{ $message }}</span>
+                    <span class="text-red-500">{{ $message }}</span>
                     @enderror
                     <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded mb-4">Login</button>
                     <p class="text-center">
-                        Don't have an account? <a href="#" onclick="toggleForms()" class="text-blue-600">Create an account</a>
+                        Don't have an account? <a href="#" onclick="toggleForms()" class="text-blue-600">Create an
+                            account</a>
                     </p>
                 </form>
 
-                <form id="register-form" class="w-full max-w-md hidden" method="POST"
-                    action="{{ route('register.store') }}">
-                    @csrf
+                <div id="register-form" class="w-full max-w-md hidden">
                     <h2 class="text-3xl font-bold mb-6 text-center">Register</h2>
 
-                    <input type="text" name="name" placeholder="Think of anonymous name..."
-                        class="text-black w-full p-4 mb-4 border border-gray-300 rounded" value="{{ old('name') }}"
-                        required>
-                    @error('name')
-                    <span class="text-red-500">{{ $message }}</span>
-                    @enderror
+                    <!-- Info Message -->
+                    <p class="mb-4 text-sm text-gray-700 text-center">
+                        We'll generate a random username and password for you and send it to your Gmail.
+                    </p>
 
-                    <input type="email" name="email" placeholder="Email, to whom may I send your password?"
-                        class="text-black w-full  p-4 mb-4 border border-gray-300 rounded" value="{{ old('email') }}"
-                        required>
-                    @error('email')
-                    <span class="text-red-500">{{ $message }}</span>
-                    @enderror
+                    <!-- Google Register Button -->
+                    <a href="{{ route('google.redirect') }}"
+                        class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded text-center block mb-4">
+                        Register with Google
+                    </a>
 
-                    <!-- Register Button -->
-                    <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded mb-4">Register</button>
                     <p class="text-center">
                         Already have an account? <a href="#" onclick="toggleForms()" class="text-blue-600">Login</a>
                     </p>
-                </form>
+                </div>
+
 
             </fieldset>
 

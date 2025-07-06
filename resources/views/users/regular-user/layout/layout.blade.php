@@ -16,83 +16,8 @@
     </script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <style>
-        /* Sidebar styling */
-        .sidebar {
-            width: 50px; /* Collapsed width */
-            height: 100vh;
-            background: #343a40;
-            position: fixed;
-            top: 0;
-            left: 0;
-            transition: width 0.3s ease-in-out;
-            overflow-x: hidden;
-            padding-top: 20px;
-        }
-
-        /* Expand sidebar on hover */
-        .sidebar:hover {
-            width: 300px;
-        }
-
-        /* Navigation links */
-        .sidebar .nav-link {
-            color: #fff;
-            padding: 10px 15px;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            transition: 0.3s;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-        /* Add hover effect */
-        .sidebar .nav-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Icon styling */
-        .sidebar .nav-link i {
-            font-size: 20px;
-            width: 30px;
-            text-align: center;
-        }
-
-        /* Hide text when collapsed */
-        .sidebar span {
-            display: none;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        /* Show text when hovered */
-        .sidebar:hover span {
-            display: inline;
-            opacity: 1;
-            margin-left: 10px;
-        }
-
-        /* Active and Disabled styles */
-        .sidebar .nav-link.active {
-            background: #007bff;
-        }
-
-        .sidebar .nav-link.disabled {
-            opacity: 0.5;
-        }
-
-        /* Main content area */
-        .content {
-            margin-left: 80px;
-            padding: 20px;
-            transition: margin-left 0.3s ease-in-out;
-        }
-
-        /* Shift content when sidebar expands */
-        .sidebar:hover + .content {
-            margin-left: 220px;
-        }
-    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
     <title>@yield('title')</title>
     @yield('script')
 </head>
