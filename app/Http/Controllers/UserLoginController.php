@@ -16,15 +16,23 @@ class UserLoginController extends Controller
             session()->regenerate();
             $user = Auth::user();
 
-            if ($user->is_new == true) {
+            if ($user->is_new) {
                 return redirect()->route('admin.password')->with('error', 'Please change your password.');
             }
 
-            return redirect()->route('admin.home');
+            // Check user role using Spatie
+            if ($user->hasRole('admin')) {
+                return redirect()->route('admin.home');
+            } elseif ($user->hasRole('user')) {
+                return redirect()->route('user.home');
+            } else {
+                Auth::logout();
+                return back()->withErrors(['email' => 'Unauthorized role.']);
+            }
         }
-
         return back()->withErrors(['email' => 'Invalid credentials, please try again.']);
     }
+
 
     public function logout(): RedirectResponse
     {
