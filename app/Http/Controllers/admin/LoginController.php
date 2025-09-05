@@ -26,7 +26,10 @@ class LoginController extends Controller
                 case 'admin':
                     return redirect()->route('admin.dashboard')->with('login successfully');
                 case 'user':
-                    return redirect()->route('admin.dashboard')->with('login successfully');
+                    return redirect()->route('user.dashboard')->with('login successfully');
+                default:
+                    Auth::logout();
+                    return redirect()->route('login')->with('error','Login failed!');
             }
         }
     }

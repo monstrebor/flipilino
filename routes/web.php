@@ -24,7 +24,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-    Route::view('/home-admin', 'admin.index')->name('admin.home');
+    Route::view('/home-admin', 'admin.index')->name('admin.dashboard');
 
     Route::view('/settings', 'settings.index')->name('admin.settings');
     Route::view('/change-password', 'settings.change-password')->name('admin.password');
