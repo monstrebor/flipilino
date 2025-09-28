@@ -1,4 +1,4 @@
-@extends('users.regular-user.layout.layout')
+@extends('users.layout.layout')
 
 @section('title', 'Home')
 
@@ -8,10 +8,10 @@
 
 @section('content')
     <div class="w-full h-full">
-        @include('users.regular-user.partials.navbar')
-        @include('users.regular-user.partials.sidebar')
-        @include('users.regular-user.home')
-        @include('users.regular-user.partials.rightpane')
+        @include('users.partials.navbar')
+        @include('users.partials.sidebar')
+        @include('users.home')
+        @include('users.partials.rightpane')
 
     </div>
 @endsection
