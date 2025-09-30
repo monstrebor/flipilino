@@ -1,0 +1,91 @@
+/* Sidebar styling */
+.sidebar {
+    height: 100vh;
+    width: 60px; /* collapsed width (wider than 20px for icons) */
+    background: #1f2937; /* dark gray */
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease-in-out;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* Expand sidebar on hover */
+.sidebar:hover {
+    width: 220px;
+}
+
+/* Navigation links */
+.sidebar .nav-link,
+.sidebar form button {
+    color: #d1d5db;
+    padding: 12px 15px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    transition: background 0.3s, color 0.3s;
+    white-space: nowrap;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.sidebar .nav-link:hover,
+.sidebar form button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+/* Icon styling */
+.sidebar .material-icons {
+    font-size: 22px;
+    width: 30px;
+    text-align: center;
+}
+
+/* Hide text when collapsed */
+.sidebar span {
+    display: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Show text when hovered */
+.sidebar:hover span {
+    display: inline;
+    opacity: 1;
+    margin-left: 10px;
+}
+
+/* Active and Disabled styles */
+.sidebar .nav-link.active {
+    background: #2563eb; /* blue-600 */
+    color: #fff;
+}
+
+.sidebar .nav-link.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Logout button special hover */
+.sidebar form button:hover {
+    background: #b91c1c; /* red */
+    color: #fff;
+}
+
+/* Main content area */
+.content {
+    margin-left: 60px;
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+/* Shift content when sidebar expands */
+.sidebar:hover + .content {
+    margin-left: 220px;
+}

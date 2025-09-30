@@ -42,4 +42,15 @@ class LogController extends Controller
 
         return redirect('/');
     }
+
+    public function autoLogout()
+    {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        // Return JSON instead of redirect
+        return response()->json(['message' => 'Logged out due to inactivity']);
+    }
+
 }

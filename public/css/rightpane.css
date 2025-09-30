@@ -1,0 +1,66 @@
+ .right-sidebar {
+     width: 60px;
+     /* collapsed */
+     transition: width 0.3s ease-in-out;
+     overflow-x: hidden;
+ }
+
+ /* Expand on hover */
+ .right-sidebar:hover {
+     width: 220px;
+ }
+
+ /* Links */
+ .right-sidebar .nav-link {
+     color: #d1d5db;
+     white-space: nowrap;
+     overflow: hidden;
+     transition: background 0.3s, color 0.3s;
+ }
+
+ .right-sidebar .nav-link:hover {
+     background: rgba(255, 255, 255, 0.1);
+     color: #fff;
+ }
+
+ /* Icons */
+ .right-sidebar .material-icons {
+     font-size: 22px;
+     width: 30px;
+     text-align: center;
+ }
+
+ /* Hide text when collapsed */
+ .right-sidebar span {
+     display: none;
+     transition: opacity 0.3s ease-in-out;
+ }
+
+ /* Show text when hovered */
+ .right-sidebar:hover span {
+     display: inline;
+     opacity: 1;
+     margin-left: 10px;
+ }
+
+ /* Content shift (if needed) */
+ .content {
+     margin-right: 60px;
+     transition: margin-right 0.3s ease-in-out;
+ }
+
+ .right-sidebar:hover~.content {
+     margin-right: 220px;
+ }
+
+ .right-sidebar .sidebar-title {
+     display: none;
+     opacity: 0;
+     transition: opacity 0.3s ease-in-out;
+     white-space: nowrap;
+ }
+
+ .right-sidebar:hover .sidebar-title {
+     display: inline;
+     opacity: 1;
+ }

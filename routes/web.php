@@ -22,6 +22,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/register-store', [RegisterController::class, 'registerUser'])->name('register.store');
     Route::post('/login-store', [LogController::class, 'login'])->name('login.store');
 });
+
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::view('/home-admin', 'admin.index')->name('admin.dashboard');
 
@@ -46,8 +47,10 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
 });
 
 
-Route::post('/logout', [LogController::class, 'logout'])->name('admin.logout');
-
+Route::post('/logout', [LogController::class, 'logout'])->name('logout');
+Route::post('/auto-logout', [LogController::class, 'autoLogout'])
+    ->middleware('auth')
+    ->name('auto.logout');
 Route::post('/password/update', [SettingsController::class, 'passwordUpdate'])
     ->middleware(['auth'])
     ->name('password.update');
