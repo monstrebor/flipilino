@@ -3,7 +3,7 @@
 
     function autoLogout() {
         console.log("⏳ Auto logout triggered...");
-        fetch("{{ route('auto.logout') }}", {
+        fetch(window.logoutUrl, {
             method: "POST",
             headers: {
                 "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
@@ -18,7 +18,7 @@
         })
         .then(data => {
             console.log(data.message);
-            window.location.href = "/"; // send back to login page
+            window.location.href = "/"; 
         })
         .catch(err => {
             console.error("❌ Logout failed:", err);
@@ -27,7 +27,9 @@
 
     function resetTimer() {
         clearTimeout(logoutTimer);
-        logoutTimer = setTimeout(autoLogout, 30 * 1000);
+        // ⏳ auto-logout after 30s idle (adjust to minutes/hours as needed)
+        logoutTimer = setTimeout(autoLogout, 15 * 60 * 1000); // 15 minutes
+        // logoutTimer = setTimeout(autoLogout, 10 * 1000); // 10 seconds
     }
 
     ["click", "mousemove", "keydown", "scroll", "touchstart"].forEach(event => {

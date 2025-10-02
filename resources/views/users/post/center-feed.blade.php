@@ -2,7 +2,7 @@
 <div class="bg-white shadow rounded-lg p-4 w-full">
     <div class="flex items-center space-x-3">
         <!-- Profile Image -->
-        <img src="https://via.placeholder.com/150" alt="Profile" class="w-10 h-10 rounded-full border border-gray-300">
+        <img src="https://tse1.mm.bing.net/th/id/OIP.uxCC-VO5jt3QWKaHGH2m1wHaHP?rs=1&pid=ImgDetMain&o=7&rm=3" class="rounded-circle me-2 w-10 l-10" alt="Avatar">
 
         <!-- Post Input Button -->
         <button type="button"
