@@ -10,7 +10,7 @@
     <div class="w-full h-full">
         @include('users.partials.navbar')
         @include('users.partials.sidebar')
-        @include('users.home')
+        @include('users.post.index')
         @include('users.partials.rightpane')
 
         @if (auth()->user()->is_new == true)
