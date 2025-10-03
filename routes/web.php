@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\{PostController,RegisterController};
-use App\Http\Controllers\admin\{LogController,SettingsController};
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\users\PostController;
+use App\Http\Controllers\admin\{LogController, SettingsController};
 use Illuminate\Support\Facades\{Auth, Route};
 use App\Models\User;
 
@@ -38,14 +39,15 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 });
 
 Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
-    
-    Route::view('/home-user', 'users.index')->name('user.dashboard');
+
+    Route::get('/home-user', [PostController::class, 'index'])->name('user.dashboard');
     Route::view('/settings', 'settings.index')->name('user.settings');
     Route::view('/change-password', 'settings.change-password')->name('user.password');
 
-    Route::get('/create-post',[PostController::class,'create'])->name('user.post');
-});
+    //Post process
+    Route::post('/store-post', [PostController::class, 'store'])->name('user.store-post');
 
+});
 
 Route::post('/logout', [LogController::class, 'logout'])->name('logout');
 Route::post('/auto-logout', [LogController::class, 'autoLogout'])

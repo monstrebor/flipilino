@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const previewContainer = document.getElementById('image-preview-container');
     const previewImage = document.getElementById('image-preview');
     const removeBtn = document.getElementById('remove-image-btn');
-    const textarea = document.querySelector('textarea[name="post_content"]');
+    const textarea = document.querySelector('textarea[name="post_text"]');
 
     if (!inputFile || !previewContainer || !previewImage || !removeBtn) {
         console.error("One or more preview elements not found!");

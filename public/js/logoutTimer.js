@@ -28,7 +28,7 @@
     function resetTimer() {
         clearTimeout(logoutTimer);
         // ⏳ auto-logout after 30s idle (adjust to minutes/hours as needed)
-        logoutTimer = setTimeout(autoLogout, 15 * 60 * 1000); // 15 minutes
+        logoutTimer = setTimeout(autoLogout, 60 * 60 * 1000); 
         // logoutTimer = setTimeout(autoLogout, 10 * 1000); // 10 seconds
     }
 

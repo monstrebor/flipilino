@@ -8,6 +8,7 @@
 
         <!-- CENTER FEED -->
         <main class="flex-1 px-2.5 max-w-2xl">
+            @include('layout.all_notif')
             @include('users.post.center-feed')
         </main>
 

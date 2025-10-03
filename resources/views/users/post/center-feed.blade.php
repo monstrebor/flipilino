@@ -1,8 +1,9 @@
-<!-- POST BOX (from your code) -->
-<div class="bg-white shadow rounded-lg p-4 w-full">
+<!-- POST BOX -->
+<div class="bg-white shadow rounded-lg p-4 w-full mt-2">
     <div class="flex items-center space-x-3">
         <!-- Profile Image -->
-        <img src="https://tse1.mm.bing.net/th/id/OIP.uxCC-VO5jt3QWKaHGH2m1wHaHP?rs=1&pid=ImgDetMain&o=7&rm=3" class="rounded-circle me-2 w-10 l-10" alt="Avatar">
+        <img src="https://tse1.mm.bing.net/th/id/OIP.uxCC-VO5jt3QWKaHGH2m1wHaHP?rs=1&pid=ImgDetMain&o=7&rm=3"
+            class="rounded-circle me-2 w-10 l-10" alt="Avatar">
 
         <!-- Post Input Button -->
         <button type="button"
@@ -46,8 +47,13 @@
     </div>
 </div>
 
-<!-- Example feed posts -->
-<div class="mt-4 space-y-4">
-    <div class="bg-white shadow rounded-lg p-4">Sample Post 1</div>
-    <div class="bg-white shadow rounded-lg p-4">Sample Post 2</div>
+<!-- Feed posts -->
+<div class="mt-2 space-y-4">
+    @forelse($posts as $post)
+        @include('users.post.feed-post')
+    @empty
+        <div class="text-center text-muted py-4">
+            <h1 class="text-3xl">No post yet</h1>
+        </div>
+    @endforelse
 </div>

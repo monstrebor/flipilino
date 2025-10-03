@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
-    <div class="modal-dialog mt-4">
+    <div class="modal-dialog mt-2">
         <div class="modal-content border-0 rounded-4 shadow">
             <div class="modal-header border-0 d-flex justify-content-center">
                 <h5 class="modal-title fw-bold fs-4 text-center w-100" id="postModalLabel">
@@ -8,24 +8,23 @@
                 </h5>
                 <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal"
                     aria-label="Close"></button>
-            </div>
-
+                    
+                </div>
             <div class="modal-body">
                 <div class="d-flex align-items-center">
                     <div>
                         <img src="https://tse1.mm.bing.net/th/id/OIP.uxCC-VO5jt3QWKaHGH2m1wHaHP?rs=1&pid=ImgDetMain&o=7&rm=3"
                             class="rounded-circle me-2 w-10 l-10" alt="Avatar">
-                        <div class="fw-bold">John Doe</div>
-                        <small class="text-muted">Public</small>
+                            <small class="text-muted">Public</small>
+                            <div class="fw-bold">{{ Auth::user()->name }}</div>
                     </div>
                 </div>
             </div>
 
-            <form action="{{ route('user.post') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('user.store-post') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-
                 <div class="mb-3">
-                    <textarea name="post_content" class="form-control border-0" rows="4"
+                    <textarea name="post_text" class="form-control border-0" rows="4"
                         placeholder="What's on your mind, {{ Auth::user()->name }}?" style="resize:none;"></textarea>
                 </div>
 
@@ -61,8 +60,7 @@
                             <label for="post-image-upload" style="cursor:pointer;">
                                 <i class="fas fa-image text-success fs-5" title="Photo/Video"></i>
                             </label>
-                            <input type="file" id="post-image-upload" name="post_image" accept="image/*"
-                                style="display:none;">
+                            <input type="file" id="post-image-upload" name="post_images[]" accept="image/*" multiple style="display:none;">
                         </div>
 
                         <!-- Tag People -->

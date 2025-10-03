@@ -11,13 +11,17 @@ class Post extends Model
 
     protected $fillable = [
         'posted_by',
-        'caption',
-        'post_image',
         'post_text',
     ];
 
-    public function posts()
+    public function user()
     {
-        return $this->hasMany(Post::class, 'posted_by', 'id');
+        return $this->belongsTo(User::class, 'posted_by');
+    }
+
+    public function images()
+    {
+        return $this->hasMany(PostImage::class);
     }
 }
+
