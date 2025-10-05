@@ -13,7 +13,7 @@
         </main>
 
         <!-- RIGHT SIDEBAR -->
-        <aside class="w-72 p-4 hidden lg:block">
+        <aside class="w-[260px] p-2 hidden lg:block">
             @include('users.post.right-sidebar')
         </aside>
     </div>

@@ -6,7 +6,9 @@
                 class="rounded-circle me-2 w-10 l-10" alt="Avatar">
             <div>
                 <h6 class="mb-0 fw-bold">{{ $post->user->name }}</h6>
-                <small class="text-muted">Just now</small>
+                <small class="text-muted fw-semibold" style="font-size: 11px;">
+                    {{ $post->created_at->diffForHumans() }}
+                </small>
             </div>
         </div>
 

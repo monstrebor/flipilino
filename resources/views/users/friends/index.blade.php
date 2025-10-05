@@ -10,8 +10,7 @@
     <div class="w-full h-full">
         @include('users.partials.navbar')
         @include('users.partials.sidebar')
-        @include('users.post.index')
+        @include('users.friends.main')
         @include('users.partials.rightpane')
-
     </div>
 @endsection

@@ -47,6 +47,12 @@
     </div>
 </div>
 
+@if (auth()->user()->is_new == true)
+    <div class="col-12 mt-2 mb-2">
+        <livewire:settings.change-password>
+    </div>
+@endif
+
 <!-- Feed posts -->
 <div class="mt-2 space-y-4">
     @forelse($posts as $post)

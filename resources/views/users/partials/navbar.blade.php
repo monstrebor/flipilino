@@ -22,7 +22,7 @@
             </a>
 
             <!-- Friends -->
-            <a href="#"
+            <a href="{{ route('user.view-friend') }}"
                 class="relative flex items-center justify-center px-6 py-2 rounded-lg hover:bg-gray-400 hover:text-blue-500 transition">
                 <i data-lucide="users" class="w-7 h-7 text-white"></i>
             </a>

@@ -3,17 +3,51 @@
 namespace App\Http\Controllers\users;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\{Post, User, Friendship};
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
     public function index()
     {
         $posts = Post::with('user', 'images')->latest()->get();
-        return view('users.index', compact('posts'));
-    }
 
+        $authId = auth()->id();
+
+        $friendIds = Friendship::where(function ($query) use ($authId) {
+            $query->where('sender_id', $authId)
+                ->orWhere('receiver_id', $authId);
+        })
+            ->pluck('sender_id', 'receiver_id')
+            ->flatten()
+            ->unique()
+            ->toArray();
+
+        $pendingIds = Friendship::where(function ($query) use ($authId) {
+            $query->where('sender_id', $authId)
+                ->orWhere('receiver_id', $authId);
+        })
+            ->where('status', 'pending')
+            ->pluck('sender_id', 'receiver_id')
+            ->flatten()
+            ->unique()
+            ->toArray();
+
+        $excludeIds = array_unique(array_merge([$authId], $friendIds, $pendingIds));
+
+        $users = User::role(['user', 'user_vip'])
+            ->whereNotIn('id', $excludeIds)
+            ->get();
+
+        $friendRequests = Friendship::where('receiver_id', $authId)
+            ->where('status', 'pending')
+            ->with('sender')
+            ->latest()
+            ->get();
+
+        return view('users.index', compact('posts', 'users', 'friendRequests'));
+    }
     public function store(Request $request)
     {
         $request->validate([
