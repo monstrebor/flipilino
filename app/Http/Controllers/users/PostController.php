@@ -11,43 +11,63 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::with('user', 'images')->latest()->get();
-
         $authId = auth()->id();
 
+        //Get your friends' IDs
         $friendIds = Friendship::where(function ($query) use ($authId) {
             $query->where('sender_id', $authId)
                 ->orWhere('receiver_id', $authId);
         })
-            ->pluck('sender_id', 'receiver_id')
-            ->flatten()
+            ->where('status', 'accepted')
+            ->get()
+            ->flatMap(function ($friendship) use ($authId) {
+                return $friendship->sender_id === $authId
+                    ? [$friendship->receiver_id]
+                    : [$friendship->sender_id];
+            })
             ->unique()
+            ->values()
             ->toArray();
 
-        $pendingIds = Friendship::where(function ($query) use ($authId) {
-            $query->where('sender_id', $authId)
-                ->orWhere('receiver_id', $authId);
-        })
-            ->where('status', 'pending')
-            ->pluck('sender_id', 'receiver_id')
-            ->flatten()
-            ->unique()
-            ->toArray();
+        $visibleUserIds = array_merge([$authId], $friendIds);
 
-        $excludeIds = array_unique(array_merge([$authId], $friendIds, $pendingIds));
-
-        $users = User::role(['user', 'user_vip'])
-            ->whereNotIn('id', $excludeIds)
+        //Show posts from you and your friends
+        $posts = Post::with('user', 'images')
+            ->whereIn('posted_by', $visibleUserIds)
+            ->latest()
             ->get();
 
+        //Friend requests (incoming only)
         $friendRequests = Friendship::where('receiver_id', $authId)
             ->where('status', 'pending')
             ->with('sender')
             ->latest()
             ->get();
 
-        return view('users.index', compact('posts', 'users', 'friendRequests'));
+        //Get all related user IDs (friends, sent, and received requests)
+        $relatedUserIds = Friendship::where(function ($query) use ($authId) {
+            $query->where('sender_id', $authId)
+                ->orWhere('receiver_id', $authId);
+        })
+            ->pluck('sender_id', 'receiver_id')
+            ->flatten()
+            ->unique()
+            ->toArray();
+
+        //Exclude self, friends, and pending requests
+        $excludeIds = array_unique(array_merge([$authId], $friendIds, $relatedUserIds));
+
+        //Friend suggestions — only unrelated people (not friends or pending)
+        $suggestions = User::role(['user', 'user_vip'])
+            ->whereNotIn('id', $excludeIds)
+            ->inRandomOrder()
+            ->take(5)
+            ->get();
+
+        return view('users.index', compact('posts', 'suggestions', 'friendRequests'));
     }
+
+
     public function store(Request $request)
     {
         $request->validate([

@@ -44,7 +44,8 @@
 </div>
 <div class="bg-white shadow rounded-lg p-2 mt-4">
     <h3 class="font-semibold text-gray-700 mb-2">Friend Suggestions</h3>
-    @forelse($users as $user)
+
+    @forelse($suggestions as $user)
         <div class="flex items-center justify-between mb-2">
             <div class="flex items-center space-x-2">
                 <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=random"

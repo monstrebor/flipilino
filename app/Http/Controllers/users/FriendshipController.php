@@ -10,6 +10,7 @@ class FriendshipController extends Controller
 {
     public function index()
     {
+        // Fetch friend requests (pending)
         $friendRequests = Friendship::where('receiver_id', auth()->id())
             ->where('status', 'pending')
             ->with('sender')

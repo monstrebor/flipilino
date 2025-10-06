@@ -10,9 +10,9 @@
         <!-- Center: Facebook-style Navigation Icons -->
         <div class="flex items-center space-x-12 text-gray-400">
             <!-- Home (Active) -->
-            <a href="#" class="relative flex items-center justify-center px-6 py-2 rounded-lg text-blue-500 
-                      border-b-4 border-blue-500 transition">
-                <i data-lucide="home" class="w-7 h-7"></i>
+            <a href="{{ route('user.dashboard') }}"
+                class="relative flex items-center justify-center px-6 py-2 rounded-lg hover:bg-gray-400 hover:text-blue-500 transition">
+                <i data-lucide="home" class="w-7 h-7 text-white"></i>
             </a>
 
             <!-- Pages -->
