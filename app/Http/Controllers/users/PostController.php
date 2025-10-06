@@ -67,7 +67,6 @@ class PostController extends Controller
         return view('users.index', compact('posts', 'suggestions', 'friendRequests'));
     }
 
-
     public function store(Request $request)
     {
         $request->validate([

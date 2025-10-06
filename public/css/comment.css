@@ -1,0 +1,66 @@
+.comment-box-bg{
+    background-color: #7b96be !important;
+}
+
+.comment-section textarea {
+    resize: none;
+}
+
+.comment-section .bg-light {
+    background-color: #f0f2f5 !important;
+}
+
+.comment-section .bg-white {
+    background-color: #fff !important;
+}
+
+.comment-section .form-control:focus {
+    box-shadow: none;
+    border-color: #ccc;
+}
+
+.comment-section .btn-link {
+    color: #65676b;
+    text-decoration: none;
+}
+
+.comment-section .btn-link:hover {
+    text-decoration: underline;
+}
+
+.comment-section strong {
+    font-size: 14px;
+}
+
+.comment-section p {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.comment-box textarea {
+    resize: none;
+    overflow: hidden;
+    min-height: 36px;
+    max-height: 120px;
+}
+
+.comment-box textarea:focus {
+    box-shadow: none !important;
+}
+
+.comment-content {
+    background-color: #f0f2f5;
+    border-radius: 18px;
+}
+
+.comment-box button.btn-primary {
+    background-color: #1877f2;
+    border: none;
+}
+
+.comment-box button.btn-primary:hover {
+    background-color: #166fe5;
+}
+
+
+

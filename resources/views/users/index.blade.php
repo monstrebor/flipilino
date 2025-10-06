@@ -4,6 +4,8 @@
 
 @section('script')
     <link rel="stylesheet" href="{{ asset('css/reactions.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/comment.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/post.css') }}">
 @endsection
 
 @section('content')

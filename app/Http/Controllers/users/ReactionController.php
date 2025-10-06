@@ -4,7 +4,7 @@ namespace App\Http\Controllers\users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Reaction;
+use App\Models\{Reaction, PostImage};
 use Illuminate\Support\Facades\Auth;
 
 class ReactionController extends Controller
@@ -33,5 +33,4 @@ class ReactionController extends Controller
 
         return back();
     }
-
 }

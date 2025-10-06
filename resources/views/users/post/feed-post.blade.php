@@ -27,17 +27,23 @@
             </div>
         @endif
 
-        <!-- Action Bar -->
-        <div class="d-flex justify-content-around border-top pt-2 text-muted">
-            @include('users.reactions.index')
-            <div class="d-flex align-items-center gap-2 cursor-pointer">
-                <i class="far fa-comment"></i>
-                <span>Comment</span>
+        @include('users.post.engagement-summary')
+        <div class="post-actions border-top pt-2 text-muted position-relative">
+            <div class="d-flex justify-content-around">
+                @include('users.reactions.index')
+
+                <!-- Comment Button -->
+                <div class="d-flex align-items-center gap-2 cursor-pointer comment-toggle" data-post="{{ $post->id }}">
+                    <i class="far fa-comment"></i>
+                    <span>Comment</span>
+                </div>
+
+                <div class="d-flex align-items-center gap-2 cursor-pointer">
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </div>
             </div>
-            <div class="d-flex align-items-center gap-2 cursor-pointer">
-                <i class="fas fa-share"></i>
-                <span>Share</span>
-            </div>
+            @include('users.comments.index')
         </div>
     </div>
 </div>

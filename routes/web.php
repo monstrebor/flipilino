@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\users\{PostController,FriendshipController, ReactionController};
+use App\Http\Controllers\users\{PostController, FriendshipController, ReactionController, CommentController};
 use App\Http\Controllers\admin\{LogController, SettingsController};
 use Illuminate\Support\Facades\{Auth, Route, Artisan};
 use App\Models\User;
@@ -49,10 +49,15 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
     //Friend process
     Route::get('/view-friends', [FriendshipController::class, 'index'])->name('user.view-friend');
     Route::post('/add-friend', [FriendshipController::class, 'addFriend'])->name('user.add-friend');
-    Route::post('/confirm-friend', [FriendshipController::class, 'confirmFriend'])->name('user.confirm-friend');
+    Route::post('/confirm-friend', action: [FriendshipController::class, 'confirmFriend'])->name('user.confirm-friend');
 
     //Reaction process
     Route::post('/user-react', [ReactionController::class, 'store'])->name('user.react-store');
+
+    //Comment Process
+    Route::post('/user-comment', [CommentController::class, 'store'])->name('user.comment-store');
+    Route::patch('/user-comment/{comment}', [CommentController::class, 'update'])->name('user.comment-update');
+    Route::delete('/user-comment/{comment}', [CommentController::class, 'destroy'])->name('user.comment-destroy');
 });
 
 Route::post('/logout', [LogController::class, 'logout'])->name('logout');
