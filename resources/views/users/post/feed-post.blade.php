@@ -29,10 +29,7 @@
 
         <!-- Action Bar -->
         <div class="d-flex justify-content-around border-top pt-2 text-muted">
-            <div class="d-flex align-items-center gap-2 cursor-pointer">
-                <i class="far fa-thumbs-up"></i>
-                <span>Like</span>
-            </div>
+            @include('users.reactions.index')
             <div class="d-flex align-items-center gap-2 cursor-pointer">
                 <i class="far fa-comment"></i>
                 <span>Comment</span>

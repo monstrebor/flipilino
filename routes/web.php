@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\users\{PostController,FriendshipController};
+use App\Http\Controllers\users\{PostController,FriendshipController, ReactionController};
 use App\Http\Controllers\admin\{LogController, SettingsController};
 use Illuminate\Support\Facades\{Auth, Route, Artisan};
 use App\Models\User;
@@ -50,6 +50,9 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
     Route::get('/view-friends', [FriendshipController::class, 'index'])->name('user.view-friend');
     Route::post('/add-friend', [FriendshipController::class, 'addFriend'])->name('user.add-friend');
     Route::post('/confirm-friend', [FriendshipController::class, 'confirmFriend'])->name('user.confirm-friend');
+
+    //Reaction process
+    Route::post('/user-react', [ReactionController::class, 'store'])->name('user.react-store');
 });
 
 Route::post('/logout', [LogController::class, 'logout'])->name('logout');

@@ -3,7 +3,7 @@
 @section('title', 'Home')
 
 @section('script')
-
+    <link rel="stylesheet" href="{{ asset('css/reactions.css') }}">
 @endsection
 
 @section('content')
@@ -12,6 +12,5 @@
         @include('users.partials.sidebar')
         @include('users.post.index')
         @include('users.partials.rightpane')
-
     </div>
 @endsection
