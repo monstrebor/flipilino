@@ -12,8 +12,9 @@ class PostController extends Controller
     public function index()
     {
         $authId = auth()->id();
+        $user = User::findOrFail($authId);
 
-        //Get your friends' IDs
+        //)Get your friends' IDs)
         $friendIds = Friendship::where(function ($query) use ($authId) {
             $query->where('sender_id', $authId)
                 ->orWhere('receiver_id', $authId);
@@ -64,7 +65,7 @@ class PostController extends Controller
             ->take(5)
             ->get();
 
-        return view('users.index', compact('posts', 'suggestions', 'friendRequests'));
+        return view('users.index', compact('posts', 'suggestions', 'friendRequests', 'user'));
     }
 
     public function store(Request $request)

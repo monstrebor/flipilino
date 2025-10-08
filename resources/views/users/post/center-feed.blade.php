@@ -2,8 +2,8 @@
 <div class="bg-white shadow rounded-lg p-4 w-full mt-2">
     <div class="flex items-center space-x-3">
         <!-- Profile Image -->
-        <img src="https://tse1.mm.bing.net/th/id/OIP.uxCC-VO5jt3QWKaHGH2m1wHaHP?rs=1&pid=ImgDetMain&o=7&rm=3"
-            class="rounded-circle me-2 w-10 l-10" alt="Avatar">
+        <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=random"
+            class="rounded-circle me-2 w-11 l-11" alt="Avatar">
 
         <!-- Post Input Button -->
         <button type="button"

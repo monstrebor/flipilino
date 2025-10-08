@@ -2,8 +2,8 @@
     <div class="card-body">
         <!-- Post Header -->
         <div class="d-flex align-items-center mb-2">
-            <img src="https://tse1.mm.bing.net/th/id/OIP.uxCC-VO5jt3QWKaHGH2m1wHaHP?rs=1&pid=ImgDetMain&o=7&rm=3"
-                class="rounded-circle me-2 w-10 l-10" alt="Avatar">
+            <img src="https://ui-avatars.com/api/?name={{ urlencode($post->user->name) }}&background=random"
+                class="w-11 h-11 rounded-full mr-2" alt="{{ $post->user->name }}">
             <div>
                 <h6 class="mb-0 fw-bold">{{ $post->user->name }}</h6>
                 <small class="text-muted fw-semibold" style="font-size: 11px;">
@@ -33,7 +33,8 @@
                 @include('users.reactions.index')
 
                 <!-- Comment Button -->
-                <div class="d-flex align-items-center gap-2 cursor-pointer comment-toggle" data-post="{{ $post->id }}">
+                <div class="d-flex align-items-center gap-2 cursor-pointer comment-toggle"
+                    data-toggle-comments="{{ $post->id }}">
                     <i class="far fa-comment"></i>
                     <span>Comment</span>
                 </div>

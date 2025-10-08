@@ -35,8 +35,9 @@
         @foreach($comments as $comment)
             <div class="d-flex align-items-start mb-3">
                 <!-- Avatar -->
-                <img src="{{ $comment->user->profile_photo_url ?? 'https://cdn-icons-png.flaticon.com/512/149/149071.png' }}"
-                    class="rounded-circle me-2" width="36" height="36" alt="Avatar">
+                <img src="{{ $comment->user->profile_photo_url
+            ?? 'https://ui-avatars.com/api/?name=' . urlencode($comment->user->name) . '&background=random' }}"
+                    class="rounded-circle" width="40" height="40" alt="{{ $comment->user->name }}">
 
                 <!-- Comment Content -->
                 <div class="comment-content bg-light rounded px-3 py-2 flex-grow-1">
