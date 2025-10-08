@@ -56,13 +56,18 @@ class User extends Authenticatable
     public function receivedFriendships()
     {
         return $this->hasMany(Friendship::class, 'receiver_id');
-        
+
     }
     public function friends()
     {
         return $this->belongsToMany(User::class, 'friendships', 'sender_id', 'receiver_id')
             ->wherePivot('status', 'accepted')
             ->withTimestamps();
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
     }
 }
 

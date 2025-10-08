@@ -3,6 +3,7 @@
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\users\{PostController, FriendshipController, ReactionController, CommentController};
 use App\Http\Controllers\admin\{LogController, SettingsController};
+use App\Http\Controllers\users\ProfileController;
 use Illuminate\Support\Facades\{Auth, Route, Artisan};
 use App\Models\User;
 
@@ -58,6 +59,12 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
     Route::post('/user-comment', [CommentController::class, 'store'])->name('user.comment-store');
     Route::patch('/user-comment/{comment}', [CommentController::class, 'update'])->name('user.comment-update');
     Route::delete('/user-comment/{comment}', [CommentController::class, 'destroy'])->name('user.comment-destroy');
+
+    //Profile Process
+    Route::get('/profile', [ProfileController::class, 'index'])->name('user.profile-index');
+    Route::put('/profile/cover-update', [ProfileController::class, 'updateCover'])->name('user.cover-update');
+    Route::post('/profile/profile-update', [ProfileController::class, 'updateProfile'])->name('user.profile-update');
+    Route::put('/profile/intro', [ProfileController::class, 'updateIntro'])->name('user.profile-intro-update');
 });
 
 Route::post('/logout', [LogController::class, 'logout'])->name('logout');

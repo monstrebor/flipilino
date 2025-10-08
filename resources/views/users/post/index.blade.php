@@ -17,5 +17,4 @@
             @include('users.post.right-sidebar')
         </aside>
     </div>
-
 </div>

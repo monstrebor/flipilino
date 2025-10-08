@@ -2,8 +2,8 @@
     <div class="card-body">
         <!-- Post Header -->
         <div class="d-flex align-items-center mb-2">
-            <img src="https://ui-avatars.com/api/?name={{ urlencode($post->user->name) }}&background=random"
-                class="w-11 h-11 rounded-full mr-2" alt="{{ $post->user->name }}">
+            <x-user-avatar />
+
             <div>
                 <h6 class="mb-0 fw-bold">{{ $post->user->name }}</h6>
                 <small class="text-muted fw-semibold" style="font-size: 11px;">

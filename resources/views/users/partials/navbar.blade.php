@@ -43,8 +43,7 @@
         <!-- Right: User/Actions -->
         <div class="flex items-center space-x-5 mr-[40px]">
             <!-- Profile avatar -->
-            <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=random"
-                class="w-11 h-11 rounded-full border-2 border-white shadow">
+            <x-user-avatar />
 
             <!-- Logout button -->
             <form method="POST" action="{{ route('logout') }}">

@@ -8,15 +8,15 @@
                 </h5>
                 <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal"
                     aria-label="Close"></button>
-                    
-                </div>
+
+            </div>
             <div class="modal-body">
                 <div class="d-flex align-items-center">
                     <div>
-                        <img src="https://tse1.mm.bing.net/th/id/OIP.uxCC-VO5jt3QWKaHGH2m1wHaHP?rs=1&pid=ImgDetMain&o=7&rm=3"
-                            class="rounded-circle me-2 w-10 l-10" alt="Avatar">
-                            <small class="text-muted">Public</small>
-                            <div class="fw-bold">{{ Auth::user()->name }}</div>
+                        <x-user-avatar />
+
+                        <small class="text-muted">Public</small>
+                        <div class="fw-bold">{{ Auth::user()->name }}</div>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,8 @@
                             <label for="post-image-upload" style="cursor:pointer;">
                                 <i class="fas fa-image text-success fs-5" title="Photo/Video"></i>
                             </label>
-                            <input type="file" id="post-image-upload" name="post_images[]" accept="image/*" multiple style="display:none;">
+                            <input type="file" id="post-image-upload" name="post_images[]" accept="image/*" multiple
+                                style="display:none;">
                         </div>
 
                         <!-- Tag People -->

@@ -48,8 +48,8 @@
     @forelse($suggestions as $user)
         <div class="flex items-center justify-between mb-2">
             <div class="flex items-center space-x-2">
-                <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=random"
-                    class="w-8 h-8 rounded-full" alt="{{ $user->name }}">
+                <x-user-avatar />
+
                 <span class="text-sm font-medium text-gray-700">{{ $user->name }}</span>
             </div>
             <form action="{{ route('user.add-friend') }}" method="POST">

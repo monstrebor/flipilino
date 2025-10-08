@@ -2,8 +2,8 @@
 <div class="bg-white shadow rounded-lg p-4 w-full mt-2">
     <div class="flex items-center space-x-3">
         <!-- Profile Image -->
-        <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=random"
-            class="rounded-circle me-2 w-11 l-11" alt="Avatar">
+        <x-user-avatar />
+
 
         <!-- Post Input Button -->
         <button type="button"
