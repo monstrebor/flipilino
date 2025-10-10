@@ -108,4 +108,32 @@ class ProfileController extends Controller
         return back()->with('success', 'Intro updated successfully!');
     }
 
+    public function show($id = null)
+    {
+        $authUser = auth()->user();
+
+        $user = $id ? User::with('profile')->findOrFail($id) : $authUser;
+
+        $authId = $authUser->id;
+
+        $friendships = Friendship::where(
+            fn($q) =>
+            $q->where('sender_id', $authId)->orWhere('receiver_id', $authId)
+        )->get();
+
+        $relatedIds = $friendships->pluck('sender_id')->merge($friendships->pluck('receiver_id'))->unique()->values()->all();
+        $friendIds = $friendships->where('status', 'accepted')
+            ->map(fn($f) => $f->sender_id === $authId ? $f->receiver_id : $f->sender_id)
+            ->unique()->values()->all();
+
+        $visibleUserIds = array_merge([$authId], $friendIds);
+
+        $canSeePosts = $user->id === $authId || in_array($user->id, $friendIds);
+
+        $posts = $canSeePosts
+            ? Post::with('user', 'images')->where('posted_by', $user->id)->latest()->get()
+            : collect();
+
+        return view('users.profile.index', compact('user', 'posts', 'authUser', 'canSeePosts'));
+    }
 }

@@ -50,7 +50,10 @@
             <div class="flex items-center space-x-2">
                 <x-user-avatar />
 
-                <span class="text-sm font-medium text-gray-700">{{ $user->name }}</span>
+                <form action="{{ route('user.profile-view',  $user->id) }}">
+                    @csrf
+                    <button type="text" class="text-sm font-medium text-gray-700 w-24 text-left">{{ $user->name }}</button>
+                </form>
             </div>
             <form action="{{ route('user.add-friend') }}" method="POST">
                 @csrf
