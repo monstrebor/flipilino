@@ -48,9 +48,12 @@
     @forelse($suggestions as $user)
         <div class="flex items-center justify-between mb-2">
             <div class="flex items-center space-x-2">
-                <x-user-avatar />
+                @php
+                    $userId = $user->id;
+                @endphp
+                <x-user-avatar :user="\App\Models\User::find($userId)" />
 
-                <form action="{{ route('user.profile-view',  $user->id) }}">
+                <form action="{{ route('user.profile-view', $user->id) }}">
                     @csrf
                     <button type="text" class="text-sm font-medium text-gray-700 w-24 text-left">{{ $user->name }}</button>
                 </form>

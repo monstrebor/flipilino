@@ -108,12 +108,10 @@ class ProfileController extends Controller
         return back()->with('success', 'Intro updated successfully!');
     }
 
-    public function show($id = null)
+    public function show($id)
     {
         $authUser = auth()->user();
-
         $user = $id ? User::with('profile')->findOrFail($id) : $authUser;
-
         $authId = $authUser->id;
 
         $friendships = Friendship::where(

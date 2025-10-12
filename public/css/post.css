@@ -27,3 +27,14 @@
 .nav-tabs .nav-link {
   color: #555;
 }
+
+#image-preview-container {
+    position: relative;
+}
+
+#image-preview-wrapper img {
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}

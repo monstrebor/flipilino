@@ -21,31 +21,26 @@
                 </div>
             </div>
 
-            <form action="{{ route('user.store-post') }}" method="POST" enctype="multipart/form-data">
+            <form id="create-post-form" action="{{ route('user.store-post') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
-                    <textarea name="post_text" class="form-control border-0" rows="4"
+                    <textarea id="post-text" name="post_text" class="form-control border-0" rows="4"
                         placeholder="What's on your mind, {{ Auth::user()->name }}?" style="resize:none;"></textarea>
                 </div>
 
-                <!-- Image Preview Section -->
-                <div id="image-preview-container" class="position-relative mb-3 d-none">
-                    <img id="image-preview" class="img-fluid rounded w-full"
-                        style="max-height: 300px; object-fit: cover;" />
+                <div id="image-preview-container" class="position-relative d-none mb-3">
+                    <div id="image-preview-container" class="d-flex flex-wrap gap-2 mb-3 d-none"></div>
 
-                    <!-- Buttons on top of image -->
                     <div class="position-absolute top-0 start-0 m-2 d-flex gap-2">
-                        <!-- Add More -->
-                        <button type="button" class="btn btn-sm btn-light shadow-sm">
+                        <button type="button" class="btn btn-sm btn-light shadow-sm" id="add-more-images-btn">
                             <i class="fas fa-plus"></i>
                         </button>
-                        <!-- Edit -->
+
                         <button type="button" class="btn btn-sm btn-light shadow-sm">
                             <i class="fas fa-edit"></i>
                         </button>
                     </div>
 
-                    <!-- Remove (X button) -->
                     <button type="button" id="remove-image-btn"
                         class="btn btn-sm btn-light shadow-sm position-absolute top-0 end-0 m-2">
                         <i class="fas fa-times"></i>

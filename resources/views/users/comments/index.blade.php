@@ -35,7 +35,10 @@
         @foreach($comments as $comment)
             <div class="d-flex align-items-start mb-3">
                 <!-- Avatar -->
-                <x-user-avatar :user="$comment->user" />
+                @php
+                    $userId = $comment->user_id;
+                @endphp
+                <x-user-avatar :user="\App\Models\User::find($userId)" />
 
                 <!-- Comment Content -->
                 <div class="comment-content bg-light rounded px-3 py-2 flex-grow-1">

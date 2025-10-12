@@ -70,27 +70,16 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'post_text' => 'nullable|string',
-            'post_images' => 'nullable',
-            'post_images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5120',
-        ]);
-        // Create the post first
         $post = Post::create([
             'posted_by' => auth()->id(),
             'post_text' => $request->post_text,
         ]);
 
-        // Handle multiple image uploads
         if ($request->hasFile('post_images')) {
             foreach ($request->file('post_images') as $image) {
-                // Generate a unique filename
                 $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-
-                // Store in storage/app/public/posts
                 $path = $image->storeAs('posts', $filename, 'public');
 
-                // Save to post_images table via relationship
                 $post->images()->create([
                     'image_path' => $path,
                 ]);

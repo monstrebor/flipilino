@@ -65,7 +65,7 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
     Route::put('/profile/cover-update', [ProfileController::class, 'updateCover'])->name('user.cover-update');
     Route::post('/profile/profile-update', [ProfileController::class, 'updateProfile'])->name('user.profile-update');
     Route::put('/profile/intro', [ProfileController::class, 'updateIntro'])->name('user.profile-intro-update');
-    Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('user.profile-view');
+    Route::get('/user/profile/{id?}', [ProfileController::class, 'show'])->name('user.profile-view');
 });
 
 Route::post('/logout', [LogController::class, 'logout'])->name('logout');

@@ -1,35 +1,70 @@
-// console.log("✅ postModal.js loaded");  testing
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("create-post-form");
+    const fileInput = document.getElementById("post-image-upload");
+    const previewContainer = document.getElementById("image-preview-container");
+    const textarea = document.getElementById("post-text");
+    let allFiles = [];
 
-    const inputFile = document.getElementById('post-image-upload');
-    const previewContainer = document.getElementById('image-preview-container');
-    const previewImage = document.getElementById('image-preview');
-    const removeBtn = document.getElementById('remove-image-btn');
-    const textarea = document.querySelector('textarea[name="post_text"]');
-
-    if (!inputFile || !previewContainer || !previewImage || !removeBtn) {
-        console.error("One or more preview elements not found!");
+    if (!form || !fileInput || !previewContainer || !textarea) {
+        console.error("❌ Missing elements: check IDs.");
         return;
     }
 
-    inputFile.addEventListener('change', function (event) {
-        const file = event.target.files[0];
-        console.log("📂 File selected:", file);
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                previewImage.src = e.target.result;
-                previewContainer.classList.remove('d-none');
-                textarea.setAttribute("rows", "1");
-            }
-            reader.readAsDataURL(file);
-        }
+    fileInput.addEventListener("change", (e) => {
+        const newFiles = Array.from(e.target.files);
+        allFiles = allFiles.concat(newFiles);
+        updatePreviews();
     });
 
-    removeBtn.addEventListener('click', function () {
-        previewImage.src = '';
-        inputFile.value = '';
-        previewContainer.classList.add('d-none');
-        textarea.setAttribute("rows", "4");
+    form.addEventListener("submit", () => {
+        const dataTransfer = new DataTransfer();
+        allFiles.forEach((file) => dataTransfer.items.add(file));
+        fileInput.files = dataTransfer.files;
     });
+
+    function updatePreviews() {
+        previewContainer.innerHTML = "";
+
+        if (allFiles.length === 0) {
+            previewContainer.classList.add("d-none");
+            textarea.setAttribute("rows", "4");
+            return;
+        }
+
+        previewContainer.classList.remove("d-none");
+        previewContainer.classList.add("d-flex", "flex-wrap", "gap-2");
+        textarea.setAttribute("rows", "1");
+
+        allFiles.forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const wrapper = document.createElement("div");
+                wrapper.className = "position-relative";
+                wrapper.style.width = "120px";
+                wrapper.style.height = "120px";
+
+                const img = document.createElement("img");
+                img.src = e.target.result;
+                img.className = "img-thumbnail w-100 h-100";
+                img.style.objectFit = "cover";
+                img.style.borderRadius = "10px";
+
+                const removeBtn = document.createElement("button");
+                removeBtn.type = "button";
+                removeBtn.className =
+                    "btn btn-sm btn-danger shadow-sm position-absolute top-0 end-0 m-1 text-white";
+                removeBtn.innerHTML = `<i class="fas fa-times fa-2xs"></i>`;
+                removeBtn.onclick = () => {
+                    allFiles.splice(index, 1);
+                    updatePreviews();
+                };
+
+                wrapper.appendChild(img);
+                wrapper.appendChild(removeBtn);
+                previewContainer.appendChild(wrapper);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
 });
+
