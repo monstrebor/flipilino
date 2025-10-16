@@ -61,6 +61,7 @@
     <script src="{{ asset('js/notif.js') }}"></script>
     <script src="{{ asset('js/postModal.js') }}"></script>
     <script src="{{ asset('js/commentModal.js') }}"></script>
+    <script src="{{ asset('js/shareModal.js') }}"></script>
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>

@@ -62,4 +62,5 @@
             <h1 class="text-3xl">No post yet</h1>
         </div>
     @endforelse
+    @include('users.post.share-modal')
 </div>

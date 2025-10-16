@@ -46,6 +46,7 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
 
     //Post process
     Route::post('/store-post', [PostController::class, 'store'])->name('user.store-post');
+    Route::post('/posts/{id}/share', [PostController::class, 'share'])->name('user.share-post');
 
     //Friend process
     Route::get('/view-friends', [FriendshipController::class, 'index'])->name('user.view-friend');

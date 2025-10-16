@@ -12,6 +12,7 @@ class Post extends Model
     protected $fillable = [
         'posted_by',
         'post_text',
+        'original_post_id',
     ];
 
     public function user()
@@ -22,6 +23,16 @@ class Post extends Model
     public function images()
     {
         return $this->hasMany(PostImage::class);
+    }
+
+    public function originalPost()
+    {
+        return $this->belongsTo(Post::class, 'original_post_id')->with(['user', 'images']);
+    }
+
+    public function shares()
+    {
+        return $this->hasMany(Post::class, 'original_post_id');
     }
 }
 

@@ -38,3 +38,9 @@
     object-fit: cover;
     border-radius: 8px;
 }
+
+.cursor-pointer:hover {
+    color: #1877f2;
+    transition: color 0.2s ease;
+}
+

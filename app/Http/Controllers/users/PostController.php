@@ -33,7 +33,7 @@ class PostController extends Controller
         $visibleUserIds = array_merge([$authId], $friendIds);
 
         //Show posts from you and your friends
-        $posts = Post::with('user', 'images')
+        $posts = Post::with(['user', 'images', 'originalPost'])
             ->whereIn('posted_by', $visibleUserIds)
             ->latest()
             ->get();
@@ -87,5 +87,18 @@ class PostController extends Controller
         }
 
         return redirect()->back()->with('success', 'Post created successfully!');
+    }
+
+    public function share(Request $request, $id)
+    {
+        $originalPost = Post::findOrFail($id);
+
+        Post::create([
+            'posted_by' => auth()->id(),
+            'post_text' => $request->input('post_text'),
+            'original_post_id' => $originalPost->id,
+        ]);
+
+        return redirect()->back()->with('success', 'Post shared successfully!');
     }
 }

@@ -27,6 +27,8 @@
             </div>
         @endif
 
+        @include('users.post.shared-post')
+
         @include('users.post.engagement-summary')
         <div class="post-actions border-top pt-2 text-muted position-relative">
             <div class="d-flex justify-content-around">
@@ -39,7 +41,8 @@
                     <span>Comment</span>
                 </div>
 
-                <div class="d-flex align-items-center gap-2 cursor-pointer">
+                <div class="d-flex align-items-center gap-2 cursor-pointer" data-bs-toggle="modal"
+                    data-bs-target="#shareModal" data-post-id="{{ $post->id }}">
                     <i class="fas fa-share"></i>
                     <span>Share</span>
                 </div>
